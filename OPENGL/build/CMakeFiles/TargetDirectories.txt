@@ -1,0 +1,5 @@
+/Users/rodrigocalegario/Dropbox/COMPUTAÇÃO/4 - PG/OPENGL/build/CMakeFiles/edit_cache.dir
+/Users/rodrigocalegario/Dropbox/COMPUTAÇÃO/4 - PG/OPENGL/build/CMakeFiles/rebuild_cache.dir
+/Users/rodrigocalegario/Dropbox/COMPUTAÇÃO/4 - PG/OPENGL/build/src/CMakeFiles/edit_cache.dir
+/Users/rodrigocalegario/Dropbox/COMPUTAÇÃO/4 - PG/OPENGL/build/src/CMakeFiles/rebuild_cache.dir
+/Users/rodrigocalegario/Dropbox/COMPUTAÇÃO/4 - PG/OPENGL/build/src/CMakeFiles/OOpenGL.dir
