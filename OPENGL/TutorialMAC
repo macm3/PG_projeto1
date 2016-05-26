@@ -4,10 +4,11 @@ Verifique se você tem instalado
 - OPENGL
 
 Rodando pela primeira vez:
-1. no terminal, vá na pasta build e verifique que não há nada nela, caso haja e essa é a primeira vez em que você esta rodando, delete todos os arquivos
+1. no terminal, vá na pasta build* e verifique que não há nada nela, caso haja e essa é a primeira vez em que você esta rodando, delete todos os arquivos
 2. com a pasta build limpa, no terminal escreva o comando cmake .. Após o comando, a sua pasta build estará com alguns arquivos
 3. no terminal, escreva o comando make para que seja gerando um executável do projeto
 4. acesse a pasta src, dentro da pasta build, pelo terminal
 5. verifique qual o arquivo executável do projeto e usando o comando ./nomeArq execute-o
 6. o projeto deverá estar em execução agora
 - esse me procedimento deve ser feito caso você não esteja conseguindo rodar o projeto 
+* caso a pasta build não exista, crie a pasta build dentro da pasta do OPENGL
