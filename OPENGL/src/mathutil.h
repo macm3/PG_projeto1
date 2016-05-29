@@ -46,6 +46,19 @@ namespace MathUtil {
         pout.x = x;
         pout.y = y;
     }
+
+    int findPonto(const std::vector<Ponto>& pontos, float x, float y){
+        int i = 0;
+        int retorno = -1;
+        for (auto p : pontos){
+            if((p.x < x+5) && (p.x > x-5)){
+                if((p.y < y+5) && (p.y > y-5))
+                    retorno = i;
+            }
+            i++;
+        }
+        return retorno;
+    }
 }
 
 #endif
