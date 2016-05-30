@@ -14,6 +14,13 @@ const int WINDOW_H = 500;
 vector <Ponto> pontos;
 bool bezier = false;
 
+int estado;
+
+// Constantes do programa
+#define FPS         30  // Quantidade de atualizacoes por segundo do programa
+#define IDLE        -2  // Nada a fazer
+#define MODIFIED    -1  // A tela foi modificada
+
 void init(void)
 {
     glClearColor(1.0, 0.0, 0.0, 1.0);
@@ -87,26 +94,55 @@ void reshape(int w, int h)
 
 void handleMouseClick(int button, int state, int x, int y)
 {
-    if (button == GLUT_LEFT_BUTTON){
+    if (estado == IDLE && button == GLUT_LEFT_BUTTON){
         if (state == GLUT_DOWN){
             printf("%d %d\n", x, y);
             int pontoFind = MathUtil::findPonto(pontos, x, y);
-            if(pontoFind > -1){
-                while(state == GLUT_DOWN){
-                    
-                }
+            if(pontoFind > -1){// movimenta o ponto
+                estado = pontoFind;
             }else{
                 pontos.push_back(Ponto(x, y));
             }
         }
-    }else if(button == GLUT_RIGHT_BUTTON){
+    }else if(button == GLUT_LEFT_BUTTON && state == GLUT_UP){
+        estado = MODIFIED;
+
+    }else if(estado == IDLE && button == GLUT_RIGHT_BUTTON){//botão para deletar
         if (state == GLUT_DOWN){
             int pontoFind = MathUtil::findPonto(pontos, x, y);
             if(pontoFind > -1)
                 pontos.erase(pontos.begin() + pontoFind);
+                estado = MODIFIED;
         }    
     }
     glutPostRedisplay();
+}
+
+void handleMotion(int x, int y)
+{
+    if((estado != MODIFIED) && (estado != IDLE)){
+        pontos[estado].x = x;
+        pontos[estado].y = y;
+    }
+}
+
+void loop(int id)
+{
+    if(estado == MODIFIED){
+        display();
+        estado = IDLE;
+    }
+    else if(estado != IDLE){
+        display();
+    }
+    glutTimerFunc(1000/FPS, loop, id);
+}
+
+void myinit()
+{
+    srand(time(NULL));
+    estado = MODIFIED;
+    loop(0);
 }
 
 int main(int argc, char** argv)
@@ -125,6 +161,9 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);
     glutKeyboardFunc(handleKeypress);
     glutMouseFunc(handleMouseClick);
+    glutMotionFunc(handleMotion);
+
+    myinit();
 
     glutMainLoop();
     return 0;
