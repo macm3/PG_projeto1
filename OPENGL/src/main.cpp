@@ -13,6 +13,8 @@ const int WINDOW_H = 500;
 
 vector <Ponto> pontos;
 bool bezier = false;
+bool deCastle = true;
+bool normal = true;
 
 int estado;
 
@@ -33,6 +35,7 @@ void handleKeypress(unsigned char key, int x, int y)
         case 27: // ESC
             exit(0);
         case 'b':
+            deCastle = !deCastle;
             bezier = !bezier;
     }
     
@@ -46,22 +49,35 @@ void display(void)
     if(pontos.size() > 0) {
         
         glBegin(GL_LINE_STRIP);
-        glColor3f(1.0f, 1.0f, 1.0f);
+        //glColor3f(1.0f, 1.0f, 1.0f);
     
         if (pontos.size() > 1) {
-            if (bezier) {
-                Ponto p(0,0);
-                for (float t = 0.0; t <= 1.0; t += 0.01) {
-                    MathUtil::bezier(pontos, t, p);
+            // if (bezier) {
+            //     glColor3f(0.5f, 0.0f, 1.0f);
+            //     Ponto p(0,0);
+            //     for (float t = 0.0; t <= 1.0; t += 0.01) {
+            //         MathUtil::bezier(pontos, t, p);
+            //         glVertex2f(p.x, p.y);
+            //     }
+            // }
+            // else 
+            
+            if(deCastle){
+                glColor3f(1.0f, 1.0f, 1.0f);
+                for (float t = 0.01; t <= 1.0; t += 0.01) {
+                    Ponto p = MathUtil::deCasteljau(pontos, t);
                     glVertex2f(p.x, p.y);
                 }
             }
-            else {
+            if (normal) {
+                glColor3f(0.0f, 1.0f, 0.0f);
                 for (auto p : pontos)
                     glVertex2d(p.x, p.y);
             }
+
         }
         else {
+            glColor3f(1.0f, 1.0f, 1.0f);
             auto p = pontos.front();
             glVertex2d(p.x, p.y);
         }
@@ -96,7 +112,6 @@ void handleMouseClick(int button, int state, int x, int y)
 {
     if (estado == IDLE && button == GLUT_LEFT_BUTTON){
         if (state == GLUT_DOWN){
-            printf("%d %d\n", x, y);
             int pontoFind = MathUtil::findPonto(pontos, x, y);
             if(pontoFind > -1){// movimenta o ponto
                 estado = pontoFind;

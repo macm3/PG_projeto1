@@ -59,6 +59,24 @@ namespace MathUtil {
         }
         return retorno;
     }
+
+    Ponto deCasteljau(const std::vector<Ponto>& pontos, float t){
+        if(pontos.size() == 1){
+            return pontos[0];
+        }
+
+        std::vector<Ponto> pontosControle;
+
+        for (int i = 0; i < pontos.size()-1; ++i)
+        {
+            Ponto p(0, 0);
+            p.x = (1-t)*pontos[i].x + t*pontos[i+1].x;
+            p.y = (1-t)*pontos[i].y + t*pontos[i+1].y;
+            pontosControle.push_back(p);
+        }
+
+        return deCasteljau(pontosControle, t);
+    }
 }
 
 #endif
