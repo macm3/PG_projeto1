@@ -77,6 +77,29 @@ namespace MathUtil {
 
         return deCasteljau(pontosControle, t);
     }
+
+    std::vector<Ponto> degreeElevation(const std::vector<Ponto>& pontos){
+        
+        std::vector<Ponto> novosPontos;
+        novosPontos.push_back(pontos[0]);
+        
+        int n = pontos.size();
+
+        for (int i = 0; i < pontos.size()-1; ++i)
+        {
+            Ponto p(0, 0);
+            float q1 = (i+1.00)/(n+1.00);
+            float q2 = 1-((i+1.00)/(n+1.00));
+            p.x = q1*pontos[i].x + q2*pontos[i+1].x;
+            p.y = q1*pontos[i].y + q2*pontos[i+1].y;
+          
+            novosPontos.push_back(p);
+        }
+
+        novosPontos.push_back(pontos[n-1]);
+      
+        return novosPontos;
+    }
 }
 
 #endif

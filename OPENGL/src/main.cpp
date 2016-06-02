@@ -37,8 +37,12 @@ void handleKeypress(unsigned char key, int x, int y)
         case 'b':
             deCastle = !deCastle;
             bezier = !bezier;
+            break;
+        case 'p':
+            if(pontos.size() > 0) pontos = MathUtil::degreeElevation(pontos);
+            break;
+        
     }
-    
     glutPostRedisplay();
 }
 
@@ -69,6 +73,7 @@ void display(void)
                     glVertex2f(p.x, p.y);
                 }
             }
+
             if (normal) {
                 glColor3f(0.0f, 1.0f, 0.0f);
                 for (auto p : pontos)
@@ -158,6 +163,14 @@ void myinit()
     srand(time(NULL));
     estado = MODIFIED;
     loop(0);
+    pontos.clear();
+}
+
+void hadleSpecialKeyboard(int key, int x, int y)
+{
+    if(key == GLUT_KEY_F5){
+        myinit();
+    }
 }
 
 int main(int argc, char** argv)
@@ -177,6 +190,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(handleKeypress);
     glutMouseFunc(handleMouseClick);
     glutMotionFunc(handleMotion);
+    glutSpecialUpFunc(hadleSpecialKeyboard);
 
     myinit();
 
