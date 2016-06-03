@@ -1,3 +1,24 @@
+/*
+Processamento Gráfico
+Prof.: Silvio Melo
+Monitor: Marcel Santana
+Alunos: Marcela Azevedo (macm3) e Rodrigo Calegario (rcac).
+Tema: Elevação de Grau da Curva de Bézier.
+
+Orientações de uso:
+1) Botão direito em cima de qualquer ponto: remove o ponto.
+2) Botão esquerdo na tela: adiciona um ponto
+3) Tecla 'B': faz a curva.
+4) Tecla 'P': adiciona pontos de controle que não alteram a curva, elevando o grau da mesma.
+5) Tecla 'M': remove a visualização dos pontos de controle.
+6) Tecla 'N': remove a visualização das retas que ligam os pontos de controle.
+7) ESC: fecha o programa.
+
+*/
+
+
+
+
 #include <GLUT/GLUT.h>
 #include <glm/glm.hpp>
 #include <OpenGL/gl.h>
