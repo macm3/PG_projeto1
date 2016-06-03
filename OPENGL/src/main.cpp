@@ -46,12 +46,14 @@ void handleKeypress(unsigned char key, int x, int y)
         case 'n':
             normal = !normal;
             break;
-        // case '=':
-        //     if(valorT < 0.1) valorT = valorT*10;
-        //     break;
-        // case '-':
-        //     if(valorT > 0.00001) valorT = valorT/10.0;
-        //     break;
+        case '=':
+            if(valorT < 0.1) valorT = valorT*10;
+            printf("%f\n", valorT);
+            break;
+        case '-':
+            if(valorT > 0.0001) valorT = valorT/10.0;
+            printf("%f\n", valorT);
+            break;
     }
     glutPostRedisplay();
 }
@@ -70,8 +72,7 @@ void display(void)
             if(bezier){
                 glBegin(GL_LINE_STRIP);
                 glColor3f(1.0f, 1.0f, 1.0f);
-                for (float t = 0.000; t <= 1.1; t += 0.1) {
-                    printf("%f\n", t);
+                for (float t = 0.000; t <= (1.00); t += valorT) {
                     Ponto p = MathUtil::deCasteljau(pontos, t);
                     glVertex2f(p.x, p.y);
                 }
