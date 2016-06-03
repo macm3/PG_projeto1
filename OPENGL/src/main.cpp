@@ -1,3 +1,16 @@
+#include <GLUT/GLUT.h>
+#include <glm/glm.hpp>
+#include <OpenGL/gl.h>
+#include <iostream>
+#include <vector>
+#include "ponto.h"
+#include "mathutil.h"
+
+using namespace std;
+
+const int WINDOW_W = 500;
+const int WINDOW_H = 500;
+
 /*
 Processamento Gráfico
 Prof.: Silvio Melo
@@ -12,25 +25,10 @@ Orientações de uso:
 4) Tecla 'P': adiciona pontos de controle que não alteram a curva, elevando o grau da mesma.
 5) Tecla 'M': remove a visualização dos pontos de controle.
 6) Tecla 'N': remove a visualização das retas que ligam os pontos de controle.
-7) ESC: fecha o programa.
-
+7) Tecla '=': aumenta a variação de t
+8) Tecla '=': diminui a variação de t
+9) ESC: fecha o programa.
 */
-
-
-
-
-#include <GLUT/GLUT.h>
-#include <glm/glm.hpp>
-#include <OpenGL/gl.h>
-#include <iostream>
-#include <vector>
-#include "ponto.h"
-#include "mathutil.h"
-
-using namespace std;
-
-const int WINDOW_W = 500;
-const int WINDOW_H = 500;
 
 vector <Ponto> pontos;
 bool bezier = false;
